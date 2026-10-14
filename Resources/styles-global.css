@@ -24,19 +24,53 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-
     width: 100%;
     z-index: 15;
+    min-height: 78px;
 }
 
 .HeaderTitle {
     display: flex;
-    flex:0%;
-    justify-content: space-between;
+    align-items: baseline;
+    gap: 14px;
     flex-wrap: wrap;
     float: left;
-
+    margin: 0;
+    padding-top: 22px;
     padding-left: 50px;
+    color: white;
+    font-size: 0;
+}
+
+.HeaderName {
+    color: rgba(255, 255, 255, 0.97);
+    font-size: clamp(1.45rem, 2.2vw, 2rem);
+    line-height: 0.95;
+    font-weight: 900;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+.HeaderSection {
+    position: relative;
+    top: -2px;
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: clamp(0.78rem, 1.15vw, 0.94rem);
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.HeaderSeparator {
+    position: relative;
+    top: -2px;
+    color: rgba(199, 59, 59, 0.96);
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+    font-weight: 900;
+    line-height: 1;
 }
 
 header nav {
@@ -46,40 +80,46 @@ header nav {
     flex-wrap: wrap;
     flex-direction:row;
     float: right;
-
     position: absolute;
-    top: 50%;
-    right: 0px;
-
+    top: 28px;
+    right: 30px;
     text-align: right;
-    
-    padding-right: 30px;
+    padding-right: 0;
     padding-left: 210px;
-    transform: translateY(-50%);
+    transform: none;
 }
 
 header ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 5px;
     float: right;
-
+    margin: 0;
+    padding: 0;
     list-style: none;
 }
 
 .header-nav-button {
     background-color: rgba(199, 59, 59, 0.959);
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin: 0;
     width: 120px;
-    padding: 0;
-    cursor: pointer;
-    float: right;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    color: #ffffff;
     position: relative;
     overflow: hidden;
-    z-index: 1;
+    cursor: pointer;
+    border: 0;
+    border-radius: 0;
+    color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.24s ease;
 }
 
-/* Create the swipe animation effect */
+.header-nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.959);
+    color: #000;
+    transform: translateY(-1px);
+}
+
+/* Button hover animation */
 .header-nav-button::before {
     content: '';
     position: absolute;
@@ -87,33 +127,44 @@ header ul {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    transition: all 0.4s ease;
-    z-index: -1;
+    background: rgba(255, 255, 255, 0.4);
+    transition: left 0.3s ease;
+    z-index: 1;
 }
 
-.header-nav-button:hover::before {
-    left: 0;
+.header-nav-button.button-hover::before {
+    left: 100%;
 }
 
-.header-nav-button:hover {
-    color: #000;
+.header-nav-button a {
+    position: relative;
+    z-index: 2;
 }
 
 .header-nav-button a {
     color: white;
     text-decoration: none;
-    position: relative;
-    z-index: 2;
-    transition: color 0.3s ease;
-    display: inline-block;
-    width: calc(100% - 20px);
-    text-align: right;
-    padding: 0px 10px 0px 0;
+    display: block;
+    padding: 5px 10px 6px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: color 0.28s ease;
 }
 
 .header-nav-button:hover a.header-button-link { /* Target the <a> element on hover */
     color: black;
+  }
+
+.header-nav-button.active {
+    background-color: rgba(167, 42, 42, 0.98);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.18);
+}
+
+.header-nav-button.active a.header-button-link {
+    color: white;
 }
 
 canvas 
@@ -185,109 +236,70 @@ canvas
 /* Toolbar container */
 .toolbar {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     gap: 20px;
-    background-color: rgb(51, 51, 51);
-    padding: 20px;
-    border-radius: 8px;
-    position: absolute;
-    right: 140px;
-    top: 30%;
-    transform: translateY(-50%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 /* Style the links */
 .toolbar a {
     text-decoration: none;
-    color: #cccccc;
+    color: #333;
     font-size: 24px;
-    transition: color 0.3s ease;
 }
 
 /* Add hover effects */
 .toolbar a:hover {
-    color: rgba(255, 255, 255, 0.959);
+    color: #0073e6;
 }
 
 /********** CONTACT FORM **********/
-.contact-section {
-    display: flex;
-    justify-content: center;
-    padding: 40px 140px;
-    margin-top: 40px;
-}
-
 .contact-form {
-    background: rgb(51, 51, 51);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 500px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-sizing: border-box; /* Add this to include padding in width calculation */
+    max-width: 400px;
 }
 
 .contact-form h2 {
-    margin-bottom: 25px;
-    font-size: 28px;
+    margin-bottom: 15px;
+    font-size: 24px;
     text-align: center;
-    color: #ffffff;
-}
-
-.form-group {
-    margin-bottom: 20px;
-    width: 100%; /* Ensure form groups take full width */
-    box-sizing: border-box; /* Add this to include padding in width calculation */
 }
 
 .contact-form label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #cccccc;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .contact-form input,
 .contact-form textarea {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-    background-color: rgb(30, 30, 30);
-    color: #ffffff;
-    transition: border-color 0.3s ease;
-    box-sizing: border-box; /* Add this to include padding in width calculation */
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    outline: none;
-    border-color: rgba(199, 59, 59, 0.959);
-}
-
-.contact-form textarea {
-    resize: vertical;
-    min-height: 120px;
 }
 
 .contact-form button {
     width: 100%;
-    padding: 12px;
-    background-color: rgba(199, 59, 59, 0.959);
+    padding: 10px;
+    background-color: #0073e6;
     color: white;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .contact-form button:hover {
-    background-color: rgba(199, 59, 59, 1);
+    background-color: #005bb5;
 }
 
 /* Vignette effect at the top */
@@ -300,4 +312,95 @@ canvas
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0)); /* Gradient fade */
     pointer-events: none; /* Allows clicks to pass through */
     z-index: 10; /* Ensure it overlays content */
+}
+
+/* Page transition animations */
+main {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateX(0);
+    opacity: 1;
+}
+
+main.slide-out {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+main.slide-in {
+    animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 760px) {
+    body {
+        margin-top: 146px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    header {
+        min-height: 126px;
+    }
+
+    .HeaderTitle {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 7px;
+        float: none;
+        padding-top: 18px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .HeaderName {
+        font-size: 1.52rem;
+        line-height: 1;
+        white-space: normal;
+    }
+
+    .HeaderSection {
+        top: 0;
+        font-size: 0.74rem;
+    }
+
+    .HeaderSeparator {
+        display: none;
+    }
+
+    header nav {
+        position: static;
+        justify-content: flex-start;
+        float: none;
+        padding: 14px 20px 0;
+        transform: none;
+    }
+
+    header ul {
+        justify-content: flex-start;
+        gap: 6px;
+        float: none;
+    }
+
+    .header-nav-button {
+        flex: 0 1 auto;
+        width: auto;
+        min-width: 94px;
+        text-align: center;
+    }
+
+    .header-nav-button a {
+        padding: 6px 10px 7px;
+        font-size: 0.7rem;
+    }
 }
